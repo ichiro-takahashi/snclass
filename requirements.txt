@@ -1,0 +1,15 @@
+joblib
+scipy
+tables
+optuna
+mlflow
+keras
+dm-sonnet
+seaborn
+matplotlib
+tqdm
+tensorflow-gpu
+numpy
+scikit-learn
+pandas
+click
