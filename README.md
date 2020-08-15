@@ -51,7 +51,7 @@ Project Organization
 
 ----
 
-# requirements
+# Requirements
 - python
 - tensorflow-gpu == 1.13
 - dm-sonnet == 1.23
@@ -94,7 +94,7 @@ You need to make input data (HDF5 format) to learn a classifier/regression model
 The input data (HDF5 format) are made from the two tables (csv files);
 one is flux data table and the other is meta data table. The structures of the tables are as follows:  
 
-**flux data table**
+**Flux data table**
 
 |object_id|mjd|passband|index|flux|flux_err|
 |:-------:|:---:|:------:|:----:|:----:|:------:|
@@ -104,7 +104,7 @@ one is flux data table and the other is meta data table. The structures of the t
 | name100 | 59749 |  Y  |   6 | 0.3974 | 0.6411  |
 | :  |  :  |  :  | :  |  :  |  :  |
 
-**meta data table**
+**Meta data table**
 
 |object_id| sn_type| redshift|
 |:-------:|:------:|:-------:|
@@ -120,16 +120,16 @@ A compressed file of sample dataset (Simdataset_HSC_sample.tar.gz) is available.
 
 The SN types are `Ia`, `Ib`, `Ic`, `Ibc`, `II`, `IIL`, `IIN`, or `IIP`.  
 
-## command
+## Command
 You convert the csv files into hdf5 files by the following command.
 
 ```
-# making training dataset of HSC
+# Making training dataset of HSC
 python data/convert_dataset.py hsc \
     --data=../data/raw/data.csv --metadata=../data/raw/metadata.csv \
     --output-path=../data/processed/sim_sn_data.h5 --data-type=train
 
-# making test dataset of HSC
+# Making test dataset of HSC
 python data/convert_dataset.py hsc \
     --data=../data/raw/data_test.csv --metadata=../data/raw/metadata_test.csv \
     --output-path=../data/processed/hsc_data.h5 --data-type=test
@@ -147,12 +147,12 @@ The true labels of the test data are needed to evaluate the test accuracy.
 (You can download the dataset from [here](https://zenodo.org/record/2539456).)
 
 ```
-# making training dataset of PLAsTiCC
+# Making training dataset of PLAsTiCC
 python data/convert_dataset.py plasticc \
     --data=../data/raw/training_set_extracted.csv --metadata=../data/raw/training_set_metadata.csv \
     --output-path=../data/processed/training_cosmos.h5 --data-type=train
 
-# making test dataset of PLAsTiCC
+# Making test dataset of PLAsTiCC
 python data/convert_dataset.py plasticc \
     --data=../data/raw/test_set_extracted.csv --metadata=../data/raw/plasticc_test_metadata.csv \
     --output-path=../data/processed/test_cosmos.h5 --data-type=test
@@ -160,7 +160,7 @@ python data/convert_dataset.py plasticc \
 
 # SN type classifier
 
-## training (HSC)
+## Training (HSC)
 This classifier supports two classification tasks.  
 One is binary classification and the other is 3-class classification.
 
@@ -173,7 +173,7 @@ The 3-class classification task classifies the samples as:
 - class 1: `Ib` `Ic` `Ibc`,
 - class 2: `II` `IIL` `IIN` `IIP`.
 
-**usage**
+**Usage**
 ```
 python hsc_sn_type.py fit-hsc \
     --sim-sn-path=../data/processed/sim_sn_data.h5 \
@@ -214,8 +214,8 @@ python hsc_sn_type.py fit-hsc \
 |use-batch-norm|The flag to use batch normalization layer or not|-|
 |use-dropout|The flag to use dropout layer or not|-|
 
-## training (PLAsTiCC)
-**usage**
+## Training (PLAsTiCC)
+**Usage**
 ```
 python hsc_sn_type.py fit-plasticc \
     --sim-sn-path=../data/processed/sim_sn_data.h5 \
@@ -240,10 +240,10 @@ option name| description| value type / choices|
 |training-cosmos-path|File path of the training dataset derived from PLAsTiCC|string|
 |test-cosmos-path|File path of the test dataset derived from PLAsTiCC|string|
 
-## prediction
+## Prediction
 The classifier predicts the class of input data with the trained model.
 
-**usage**
+**Usage**
 ```
 python hsc_sn_type.py predict \
     --data-path=../data/processed/hsc_data.h5 \
@@ -274,7 +274,7 @@ The predicted values are logits.
 A larger value means a higher probability to belong to the class.    
 If you apply the softmax function, you can interpret the output values as probabilities.
 
-## hyper-parameter search of classifier model
+## Hyper-parameter search of classifier model
 Note that it takes several days to optimize the hyper-parameters.
 
 ```
@@ -298,7 +298,7 @@ This is a regression task to predict the redshift from the flux
 This regression task is more difficult than the classification task.
 Therefore, it is recommended to use a larger model.
 
-**usage**
+**Usage**
 ```
 python hsc_redshift.py learn \
     --sim-sn-path=../data/processed/sim_sn_data.h5 \
@@ -337,10 +337,10 @@ python hsc_redshift.py learn \
 |use-batch-norm|The flag to use batch normalization layer or not|-|
 |target-distmod / target-redshift|The distmod is the target value if the flag `target-distmod` is set. the redshift value is the target if `target-redshift` is set.|- 
 
-## prediction
+## Prediction
 This script predicts the redshift of input data with the trained model.
 
-**usage**
+**Usage**
 ```
 python hsc_redshift.py predict \
     --data-path=../data/processed/hsc_data.h5 \
@@ -355,7 +355,7 @@ python hsc_redshift.py predict \
 |data-type|`SimSN` for training dataset, `HSC` for test dataset|`SimSN` or `HSC`|
 |output-name|File name to output the predicted results (the file is created in `model-dir`)|str|
 
-## hyper-parameter search of regression model
+## Hyper-parameter search of regression model
 
 ```
 python hsc_redshift.py search \
