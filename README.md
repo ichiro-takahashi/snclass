@@ -1,4 +1,4 @@
-SN Type Classifier and Redshift Regression (CREST project)
+SN Type Classifier and Redshift Regression 
 =========================================================
 
 A short description of the project.
@@ -9,41 +9,41 @@ Project Organization
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
+    │   ├── interim        <- Intermediate data.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details.
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── models             <- Trained and serialized models, model predictions, and model summaries.
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── references         <- Data dictionaries, manuals, and other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc..
+    │   └── figures        <- Generated graphics and figures.
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── requirements.txt   <- The requirements for reproducing the analysis environment, e.g.
+    │                         generated with `pip freeze > requirements.txt.`
     │
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── src                <- Source code for this project.
+    │   ├── __init__.py    <- Makes src a Python module.
     │   │
-    │   ├── data           <- Scripts to make datasets
-    │   │   ├── make_dataset.py  <- Script to make input dataset to learn
-    │   │   └── cosmology.py     <- Script to compute distmod
+    │   ├── data           <- Scripts to make datasets.
+    │   │   ├── make_dataset.py  <- Script to make input dataset to learn.
+    │   │   └── cosmology.py     <- Script to compute distmod.
     │   │
-    │   ├── hsc             <- Scripts to load input data or model
-    │   │   ├── dataset.py  <- Script to format input values
-    │   │   ├── loader.py   <- Script to load dataset
-    │   │   └── model.py    <- Script to define DNN architecture
-    │   ├── hsc_redshift.py <- Script to train a redshift regression model and predict redshift values
-    │   │                      and to search hyper parameters of the model
-    │   ├── hsc_search.py   <- Script to search hyper parameters of SN classifier
-    │   ├── hsc_sn_type.py  <- Script to train sn classifier and predict for sn types
+    │   ├── hsc             <- Scripts to load input data or model.
+    │   │   ├── dataset.py  <- Script to format input values.
+    │   │   ├── loader.py   <- Script to load dataset.
+    │   │   └── model.py    <- Script to define DNN architecture.
+    │   ├── hsc_redshift.py <- Script to train a redshift regression model, to predict redshift values,
+    │   │                      and to search hyper parameters of the model.
+    │   ├── hsc_search.py   <- Script to search hyper parameters of SN classifier.
+    │   ├── hsc_sn_type.py  <- Script to train sn classifier and predict for sn types.
 
 --------
 
@@ -81,22 +81,27 @@ pip install dm-sonnet==1.23 mlflow optuna==0.14.0
 
 # AdaBound-Tensorflow is registered as a submodule of our program.
 git submodule update -i
+
+or
+
+cd references
+git clone https://github.com/taki0112/AdaBound-Tensorflow.git
 ```
 
 # Data Preparation
-You need to make input data(HDF5 format) to learn a classifier/regression model.
+You need to make input data (HDF5 format) to learn a classifier/regression model.
 
-The input data(HDF5 format) is made from the two tables(csv files),
-one is flux data table and another is meta data table.  
+The input data (HDF5 format) are made from the two tables (csv files);
+one is flux data table and the other is meta data table.  
 The structures of the tables are as follows.  
-You save the tables as csv(comma separated values) format.
+You save the tables as csv (comma separated values) format.
 
 **flux data table**
 
 |object_id|mjd|passband|index|flux|flux_err|
 |:-------:|:---:|:------:|:----:|:----:|:------:|
-| name1 | 59751 |  u  |   1 | 38.649 | 0.4791  |
-| name1 | 59758 |  u  |   2 | 46.387 | 1.0287  |
+| name1 | 59751 |  u  |   0 | 38.649 | 0.4791  |
+| name1 | 59758 |  u  |   1 | 46.387 | 1.0287  |
 | :  |  :  |  :  | :  |  :  |  :  |
 | name100 | 59749 |  Y  |   6 | 0.3974 | 0.6411  |
 | :  |  :  |  :  | :  |  :  |  :  |
@@ -129,14 +134,14 @@ python data/convert_dataset.py hsc \
     --output-path=../data/processed/hsc_data.h5 --data-type=test
 ```
 
-The names of the csv files and the hdf5 files are arbitrarily.
+The names of the csv files and the hdf5 files are chosen arbitrarily.
 
 ### PLAsTiCC
 The input data dimensions of all samples must be same.  
 You need to extract the data properly.
 
 The data format of the csv files are same as the original data.
-(e.g. The values of `passband` are digits.)  
+(e.g. the values of `passband` are digits.)  
 The true labels of the test data are needed to evaluate the test accuracy.
 (You can download the dataset from [here](https://zenodo.org/record/2539456).)
 
@@ -155,14 +160,14 @@ python data/convert_dataset.py plasticc \
 # SN type classifier
 
 ## training (HSC)
-It supports two classification tasks.  
-One is binary classification. Another is 3-class classification.
+This classifier supports two classification tasks.  
+One is binary classification and the other is 3-class classification.
 
-In binary classification task, a binary classifier tries to distinguish the samples;
+The binary classification task classifies the samples as:
 - class 0: `Ia`,
 - class 1: others (`Ib`, `Ic`, `Ibc`, `II`, `IIL`, `IIN`, `IIP`).
   
-In 3-class classification task, a multi class classifier tries to distinguish
+The 3-class classification task classifies the samples as:
 - class 0: `Ia`,
 - class 1: `Ib` `Ic` `Ibc`,
 - class 2: `II` `IIL` `IIN` `IIP`.
@@ -184,29 +189,29 @@ python hsc_sn_type.py fit-hsc \
 
 |option name| description| value type / choices|
 |:-------|:------|:-------|
-|sim-sn-path|file path of the training dataset|string|
-|hsc-path|file path of the test dataset|string|
-|model-dir|output directory to save the learned models and prediction results|string|
-|seed|random seed|int|
-|n-highways|the number of Highway layers|int|
-|drop-rate|the ratio of dropout layer|float|
+|sim-sn-path|File path of the training dataset|string|
+|hsc-path|File path of the test dataset|string|
+|model-dir|Output directory to save the learned models and prediction results|string|
+|seed|Random seed|int|
+|n-highways|The number of Highway layers|int|
+|drop-rate|The ratio of dropout layer|float|
 |patience|The model decides to finish to learn every `patience` epochs.|int|
-|norm|the flag to normalize the input values|-|
-|activation|the types of activation layer|relu, sigmoid, tanh, or identical|
-|input1|the type of the main input values|magnitude or absolute-magnitude|
-|input2|the type of the sub input values|none or scaled-flux|
-|optimizer|the type of optimizer|momentum, adam, amsbound, or adabound|
-|adabound-final-lr|the final learning rate, it is available when `optimizer` is adabound or amsbound|float|
-|lr|learning rate|float|
-|eval-frequency|it evaluate test dataset every `eval-frequency` epochs.|int|
-|mixup|use mixup or not|mixup or none|
-|fold|the index of the folds of cross validation, if 'fold' is -1 then all folds are target|int|
-|threads|the number of threads|int|
-|cv|the number of folds of cross validation|int|
-|binary / multi|`binary` is binary classification, `multi` is 3-class classification|-|
-|remove-y|the flag to remove Y band or not|-|
-|use-batch-norm|the flag to use batch normalization layer or not|-|
-|use-dropout|the flag to use dropout layer or not|-|
+|norm|The flag to normalize the input values|-|
+|activation|The types of activation layer|relu, sigmoid, tanh, or identical|
+|input1|The type of the main input values|magnitude or absolute-magnitude|
+|input2|The type of the sub input values|none or scaled-flux|
+|optimizer|The type of optimizer|momentum, adam, amsbound, or adabound|
+|adabound-final-lr|The final learning rate. This is available when `optimizer` is adabound or amsbound|float|
+|lr|Learning rate|float|
+|eval-frequency|Evaluate test dataset every `eval-frequency` epochs.|int|
+|mixup|Use mixup or not|mixup or none|
+|fold|The index of the folds of cross validation. If 'fold' is -1, all folds are target|int|
+|threads|The number of threads|int|
+|cv|The number of folds of cross validation|int|
+|binary / multi|`binary` for binary classification, `multi` for 3-class classification|-|
+|remove-y|The flag to remove Y band or not|-|
+|use-batch-norm|The flag to use batch normalization layer or not|-|
+|use-dropout|The flag to use dropout layer or not|-|
 
 ## training (PLAsTiCC)
 **usage**
@@ -231,11 +236,11 @@ The options are almost same with the case in training HSC dataset.
 
 option name| description| value type / choices|
 |:-------|:------|:-------|
-|training-cosmos-path|file path of the training dataset derived from PLAsTiCC|string|
-|test-cosmos-path|file path of the test dataset derived from PLAsTiCC|string|
+|training-cosmos-path|File path of the training dataset derived from PLAsTiCC|string|
+|test-cosmos-path|File path of the test dataset derived from PLAsTiCC|string|
 
 ## prediction
-It predicts the class of each sample in the dataset with the trained model.
+The classifier predicts the class of input data with the trained model.
 
 **usage**
 ```
@@ -247,10 +252,10 @@ python hsc_sn_type.py predict \
 
 |option name| description| value type / choices|
 |:-------|:------|:-------|
-|data-path|file path of the dataset to predict|str|
-|model-dir|directory that the trained model is in|str|
-|data-type|`SimSN` is training dataset. `HSC` is test dataset|`SimSN`, `HSC`, or `PLAsTiCC`|
-|output-name|file name to output the predicted results (the file is created in `model-dir`)|str|
+|data-path|File path of the dataset to predict|str|
+|model-dir|Directory that the trained model is in|str|
+|data-type|`SimSN` for training dataset, `HSC` for test dataset|`SimSN`, `HSC`, or `PLAsTiCC`|
+|output-name|File name to output the predicted results (the file is created in `model-dir`)|str|
 
 The first line of the output file show the class IDs.  
 In binary classification case (this means you used the option `--binary` to train the model),
@@ -265,11 +270,11 @@ the relationship is as follows,
 - class 2: `II` `IIL` `IIN` `IIP`.
 
 The predicted values are logits.
-The each value means that it is larger, the more likely it belongs to the class.    
+A larger value means a higher probability to belong to the class.    
 If you apply the softmax function, you can interpret the output values as probabilities.
 
 ## hyper-parameter search of classifier model
-It takes several days to optimize the hyper-parameters.
+Note that it takes several days to optimize the hyper-parameters.
 
 ```
 python hsc_search.py search-hsc \
@@ -285,13 +290,12 @@ python hsc_search.py search-hsc \
 
 |option name| description| value type / choices|
 |:-------|:------|:-------|
-|n-trials|the number of search|int|
+|n-trials|The number of search|int|
 
 # Redshift regression
-It predict the redshift value from the flux.
-This is a regression task which the model predicts the target values as accurately as possible.  
-This regression task seems to be more difficult than the classification task.
-Therefore, the larger the size of the model tends to be the better the result.
+This is a regression task to predict the redshift from the flux  
+This regression task is more difficult than the classification task.
+Therefore, it is recommended to use a larger model.
 
 **usage**
 ```
@@ -310,30 +314,30 @@ python hsc_redshift.py learn \
 
 |option name| description| value type / choices|
 |:-------|:------|:-------|
-|sim-sn-path|file path of the training dataset|string|
-|hsc-path|file path of the test dataset|string|
-|model-dir|output directory to save the learned models and prediction results|string|
-|seed|random seed|int|
-|n-highways|the number of Highway layers|int|
-|drop-rate|the ratio of dropout layer|float|
+|sim-sn-path|File path of the training dataset|string|
+|hsc-path|File path of the test dataset|string|
+|model-dir|Output directory to save the learned models and prediction results|string|
+|seed|Random seed|int|
+|n-highways|The number of Highway layers|int|
+|drop-rate|The ratio of dropout layer|float|
 |patience|The model decides to finish to learn every `patience` epochs.|int|
-|norm|the flag to normalize the input values|-|
-|activation|the types of activation layer|relu, sigmoid, tanh, or identical|
-|input1|the type of the main input values|magnitude or flux|
-|input2|the type of the sub input values|none or scaled-flux|
-|optimizer|the type of optimizer|momentum, adam, amsbound, or adabound|
-|adabound-final-lr|the final learning rate, it is available when `optimizer` is adabound or amsbound|float|
-|lr|learning rate|float|
-|eval-frequency|it evaluate test dataset every `eval-frequency` epochs.|int|
-|fold|the index of the folds of cross validation, if `fold` is -1 then all folds are target|int|
-|threads|the number of threads|int|
-|cv|the number of folds of cross validation|int|
-|remove-y|the flag to remove Y band or not|-|
-|use-batch-norm|the flag to use batch normalization layer or not|-|
-|target-distmod / target-redshift|the distmod is the target value if the flag `target-distmod` is set. the redshift value is the target if `target-redshift` is set.|- 
+|norm|The flag to normalize the input values|-|
+|activation|The types of activation layer|relu, sigmoid, tanh, or identical|
+|input1|The type of the main input values|magnitude or flux|
+|input2|The type of the sub input values|none or scaled-flux|
+|optimizer|The type of optimizer|momentum, adam, amsbound, or adabound|
+|adabound-final-lr|The final learning rate, it is available when `optimizer` is adabound or amsbound|float|
+|lr|Learning rate|float|
+|eval-frequency|Evaluate test dataset every `eval-frequency` epochs.|int|
+|fold|The index of the folds of cross validation, if `fold` is -1 then all folds are target|int|
+|threads|The number of threads|int|
+|cv|The number of folds of cross validation|int|
+|remove-y|The flag to remove Y band or not|-|
+|use-batch-norm|The flag to use batch normalization layer or not|-|
+|target-distmod / target-redshift|The distmod is the target value if the flag `target-distmod` is set. the redshift value is the target if `target-redshift` is set.|- 
 
 ## prediction
-It predicts the class of each sample in the dataset with the trained model.
+This script predicts the redshift of input data with the trained model.
 
 **usage**
 ```
@@ -345,10 +349,10 @@ python hsc_redshift.py predict \
 
 |option name| description| value type / choices|
 |:-------|:------|:-------|
-|data-path|file path of the dataset to predict|str|
-|model-dir|directory that the trained model is in|str|
-|data-type|`SimSN` is training dataset. `HSC` is test dataset|`SimSN` or `HSC`|
-|output-name|file name to output the predicted results (the file is created in `model-dir`)|str|
+|data-path|File path of the dataset to predict|str|
+|model-dir|Directory that the trained model is in|str|
+|data-type|`SimSN` for training dataset, `HSC` for test dataset|`SimSN` or `HSC`|
+|output-name|File name to output the predicted results (the file is created in `model-dir`)|str|
 
 ## hyper-parameter search of regression model
 
@@ -367,3 +371,7 @@ python hsc_redshift.py search \
 |option name| description| value type / choices|
 |:-------|:------|:-------|
 |n-trials|the number of search|int|
+
+# Acknowledgments
+
+This project is supported by JST CREST Grant NumberJPMHCR1414, JST AIP Acceleration Research Grant NumberJP20317829, MEXT KAKENHI Grant Numbers 18H04345(N.Ya.),  17H06363  (M.T.),  and  JSPS  KAKENHI  GrantNumbers 18K03696 (N.S.), 16H02183 (M.T.), 19H00694 (M.T.),20H00179 (N.T.).
