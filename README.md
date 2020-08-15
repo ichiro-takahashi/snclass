@@ -92,9 +92,7 @@ git clone https://github.com/taki0112/AdaBound-Tensorflow.git
 You need to make input data (HDF5 format) to learn a classifier/regression model.
 
 The input data (HDF5 format) are made from the two tables (csv files);
-one is flux data table and the other is meta data table. The structures of the tables are as follows.  
-You save the tables as csv (comma separated values) format.
-A compressed file of sample dataset (Simdataset_HSC_sample.tar.gz) is available. It contains a flux data table and meta data table of 100,000 simulated supernovae for the classification of the HSC survey data.
+one is flux data table and the other is meta data table. The structures of the tables are as follows:  
 
 **flux data table**
 
@@ -116,6 +114,9 @@ A compressed file of sample dataset (Simdataset_HSC_sample.tar.gz) is available.
 |name100| Ib | 1.11|
 | :  |  :  |  :  |
 
+You need to save the tables as csv (comma separated values) format.
+
+A compressed file of sample dataset (Simdataset_HSC_sample.tar.gz) is available. It contains a flux data table and meta data table of 100,000 simulated supernovae for the classification of the HSC survey data.
 
 The SN types are `Ia`, `Ib`, `Ic`, `Ibc`, `II`, `IIL`, `IIN`, or `IIP`.  
 
