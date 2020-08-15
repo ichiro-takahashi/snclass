@@ -188,7 +188,7 @@ python hsc_sn_type.py fit-hsc \
     --binary --remove-y --use-batch-norm --use-dropout
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |sim-sn-path|File path of the training dataset|string|
 |hsc-path|File path of the test dataset|string|
@@ -235,7 +235,7 @@ The options are almost same with the case in training HSC dataset.
 `hsc-path` and `remove-y` are unavailable.  
 `training-cosmos-path` and `test-cosmos-path` are newly added.
 
-option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |training-cosmos-path|File path of the training dataset derived from PLAsTiCC|string|
 |test-cosmos-path|File path of the test dataset derived from PLAsTiCC|string|
@@ -251,7 +251,7 @@ python hsc_sn_type.py predict \
     --data-type=HSC --output-name=prediction.csv
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |data-path|File path of the dataset to predict|str|
 |model-dir|Directory that the trained model is in|str|
@@ -289,7 +289,7 @@ python hsc_search.py search-hsc \
     --binary --remove-y --n-trials=100
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |n-trials|The number of search|int|
 
@@ -313,7 +313,7 @@ python hsc_redshift.py learn \
     --remove-y --use-batch-norm --target-redshift
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |sim-sn-path|File path of the training dataset|string|
 |hsc-path|File path of the test dataset|string|
@@ -348,7 +348,7 @@ python hsc_redshift.py predict \
     --data-type=HSC --output-name=prediction.csv
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
 |data-path|File path of the dataset to predict|str|
 |model-dir|Directory that the trained model is in|str|
@@ -369,9 +369,9 @@ python hsc_redshift.py search \
     --remove-y --target-redshift --n-trials=100
 ```
 
-|option name| description| value type / choices|
+|Option name| Description| Value type / Choices|
 |:-------|:------|:-------|
-|n-trials|the number of search|int|
+|n-trials|The number of search|int|
 
 # Acknowledgments
 
