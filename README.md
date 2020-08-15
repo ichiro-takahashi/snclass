@@ -375,4 +375,4 @@ python hsc_redshift.py search \
 
 # Acknowledgments
 
-This project is supported by JST CREST Grant NumberJPMHCR1414, JST AIP Acceleration Research Grant NumberJP20317829, MEXT KAKENHI Grant Numbers 18H04345(N.Ya.),  17H06363  (M.T.),  and  JSPS  KAKENHI  GrantNumbers 18K03696 (N.S.), 16H02183 (M.T.), 19H00694 (M.T.),20H00179 (N.T.).
+This project is supported by JST CREST Grant NumberJPMHCR1414, JST AIP Acceleration Research Grant NumberJP20317829, MEXT KAKENHI Grant Numbers 18H04345, 17H06363, and JSPS KAKENHI GrantNumbers 18K03696, 16H02183, 19H00694, 20H00179.
